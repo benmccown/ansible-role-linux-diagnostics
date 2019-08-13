@@ -1,0 +1,62 @@
+---
+- name: "Running uptime"
+  command: uptime
+  register: uptime_out
+- name: "Running dmesg | tail"
+  shell: dmesg | tail
+  register: dmesg_out
+- name: "Running vmstat 1 5"
+  shell: vmstat 1 5
+  register: vmstat_out
+- name: "Running mpstat -P ALL 1 5"
+  shell: mpstat -P ALL 1 5
+  register: mpstat_out
+- name: "Running pidstat 1 5"
+  shell: pidstat 1 5
+  register: pidstat_out
+- name: "Running iostat -xz 1 5"
+  shell: iostat -xz 1 5
+  register: iostat_out
+- name: "Running df -h"
+  shell: df -h
+  register: diskfree_out
+- name: "Running free -mh"
+  shell: free -mh
+  register: free_out
+- name: "Running sar -n DEV 1 5"
+  shell: sar -n DEV 1 5
+  register: sar1_out
+- name: "Running sar -n TCP,ETCP 1 5"
+  shell: sar -n TCP,ETCP 1 5
+  register: sar2_out
+# --- Output Below ---
+- name: "uptime"
+  debug:
+    var: uptime_out.stdout_lines
+- name: "dmesg | tail"
+  debug:
+    var: dmesg_out.stdout_lines
+- name: "vmstat 1 5"
+  debug:
+    var: vmstat_out.stdout_lines
+- name: "mpstat -P ALL 1 5"
+  debug:
+    var: mpstat_out.stdout_lines
+- name: "pidstat 1 5"
+  debug:
+    var: pidstat_out.stdout_lines
+- name: "iostat -xz 1 5"
+  debug:
+    var: iostat_out.stdout_lines
+- name: "df -h"
+  debug:
+    var: diskfree_out.stdout_lines
+- name: "free -mh"
+  debug:
+    var: free_out.stdout_lines
+- name: "sar -n DEV 1 5"
+  debug:
+    var: sar1_out.stdout_lines
+- name: "sar -n TCP,ETCP 1 5"
+  debug:
+    var: sar2_out.stdout_lines

@@ -1,0 +1,21 @@
+---
+- name: get host ip list
+  command: ip a
+  register: ip_list_result
+  changed_when: false
+
+- name: override default ipv4 ip (eth1)
+  set_fact:
+    ansible_default_ipv4:
+      address:  "{{ hostvars[inventory_hostname].ansible_eth1.ipv4.address }}"
+  when: ip_list_result.stdout is search("eth1")
+
+- name: override default ipv4 ip (enp0s8)
+  set_fact:
+    ansible_default_ipv4:
+      address:  "{{ hostvars[inventory_hostname].ansible_enp0s8.ipv4.address }}"
+  when: ip_list_result.stdout is search("enp0s8")
+
+- name: show default ipv4 address
+  debug:
+    var: ansible_default_ipv4.address

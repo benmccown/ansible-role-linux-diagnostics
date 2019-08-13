@@ -1,0 +1,27 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: ansible_push
+  ansible_config: test/ansible.cfg
+  chef_bootstrap_url: nil
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: linuxdiag1-centos-7.6
+    driver:
+      box: bento/centos-7.6
+      network:
+        - ['private_network', {ip: '192.168.0.50'}]
+      vm_hostname: linuxdiag1
+
+suites:
+  - name: default
+    provisioner:
+      playbook: test/integration/default/default.yml
+    verifier:
+      inspec_tests:
+        - test/integration/default

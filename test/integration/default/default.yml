@@ -1,0 +1,24 @@
+---
+- hosts: all
+  gather_facts: true
+  become: yes
+
+  #vars:
+  #  request: start
+  #  service_restart: False
+  #  first_host: keepalived3-centos-76 #required for keepalived-verify.yaml
+
+  pre_tasks:
+    - name: override ip address for gui vagrant testing
+      include_role:
+        name: linux-diagnostics
+        tasks_from: ipv4-override.yml
+    
+    - name: ensure sysstat present
+      package:
+        name: sysstat
+        state: present
+
+  roles:
+    - name: initial start
+      role: linux-diagnostics

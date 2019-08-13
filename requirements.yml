@@ -1,0 +1,4 @@
+---
+- name: vault
+  src: git@github.com:the-container-store/Ansible-Role-Vault-Lookup.git
+  scm: git

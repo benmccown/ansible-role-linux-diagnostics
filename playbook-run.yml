@@ -1,0 +1,14 @@
+---
+- hosts: all
+  gather_facts: true
+  become: yes
+
+  pre_tasks:
+    - name: ensure sysstat present
+      package:
+        name: sysstat
+        state: present
+
+  roles:
+    - name: initial start
+      role: linux-diagnostics

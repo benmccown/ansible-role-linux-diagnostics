@@ -1,0 +1,12 @@
+galaxy_info:
+  author: Ben McCown <bmccown93@gmail.com>
+  description: Linux Diagnostics Role
+  license: Apache
+  min_ansible_version: 2.4.2.0 
+  platforms:
+  - name: EL
+    versions:
+    - 6
+    - 7
+  galaxy_tags: []
+dependencies: []
